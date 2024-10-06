@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use DB;
+use App\Http\Requests\Auth\RegisterRequest;
+
 
 use App\Models\Users\Subjects;
 use App\Models\Users\User;
@@ -35,8 +37,9 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
+        dd($request);
         DB::beginTransaction();
         try{
             $old_year = $request->old_year;
@@ -57,6 +60,7 @@ class RegisteredUserController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
+            // dd($user_get);
             if($request->role == 4){
                 $user = User::findOrFail($user_get->id);
                 $user->subjects()->attach($subjects);

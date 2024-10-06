@@ -68,7 +68,7 @@ class User extends Authenticatable
 
     // ユーザーが複数の科目を取得する
     public function subjects(){
-        return $this->hasMany(Subject::class);// リレーションの定義
+        return $this->hasMany(Subjects::class);// リレーションの定義
     }
 
     // いいねしているかどうか
