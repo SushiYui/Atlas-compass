@@ -34,6 +34,14 @@ class User extends Authenticatable
         'password'
     ];
 
+    public function isTeacher(){
+        return in_array($this->role,[1,2,3]);
+    }
+
+    public function isStudent(){
+        return $this->role ===4;
+    }
+
     protected $dates = ['deleted_at'];
 
     /**
@@ -68,7 +76,7 @@ class User extends Authenticatable
 
     // ユーザーが複数の科目を取得する
     public function subjects(){
-        return $this->hasMany(Subjects::class);// リレーションの定義
+        return $this->belongsToMany(Subjects::class, 'subject_users', 'user_id', 'subject_id');// リレーションの定義
     }
 
     // いいねしているかどうか

@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request)
     {
-        dd($request);
+        // dd($request);
         DB::beginTransaction();
         try{
             $old_year = $request->old_year;
@@ -61,10 +61,10 @@ class RegisteredUserController extends Controller
                 'password' => bcrypt($request->password)
             ]);
             // dd($user_get);
-            if($request->role == 4){
+            // if($request->role == 4){
                 $user = User::findOrFail($user_get->id);
                 $user->subjects()->attach($subjects);
-            }
+            // }
             DB::commit();
             return view('auth.login.login');
         }catch(\Exception $e){
