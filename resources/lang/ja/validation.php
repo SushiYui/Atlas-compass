@@ -39,7 +39,7 @@ return [
     'digits_between'       => ':attributeは、:min桁から:max桁にしてください。',
     'dimensions'           => ':attributeの画像サイズが無効です',
     'distinct'             => ':attributeの値が重複しています。',
-    'email'                => ':attributeは、有効なメールアドレス形式で指定してください。',
+    'email'                => ':attributeは、正しい形式で入力してください。',
     'ends_with'            => 'The :attribute must end with one of the following: :values',
     'exists'               => '選択された:attributeは、有効ではありません。',
     'file'                 => ':attributeはファイルでなければいけません。',
@@ -129,11 +129,23 @@ return [
     |
     */
 
-    'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
-        ],
-    ],
+    // 'custom' => [
+    //     'attribute-name' => [
+    //         'rule-name' => 'custom-message',
+    //     ],
+    // ],
+    'attributes' => [
+    'over_name' => '姓',
+    'under_name' => '名',
+    'over_name_kana' => 'セイ',
+    'under_name_kana' => 'メイ',
+    'mail_address' => 'メールアドレス',
+    'sex' => '性別',
+    'birth_day' =>'生年月日',
+    'role' => '権限',
+    'password' => 'パスワード',
+    'remember_token' => 'リメンバートークン',
+],
 
     /*
     |--------------------------------------------------------------------------

@@ -159,6 +159,11 @@
             <option value="30">30</option>
             <option value="31">31</option>
           </select>
+          @if($errors->has('birth_day'))
+          @foreach ($errors->get('birth_day') as $error )
+          <div class="error-message">{{ $error }}</div>
+          @endforeach
+          @endif
         </div>
         <div class="mt-3">
           <label class="d-block m-0" style="font-size:13px">役職</label>

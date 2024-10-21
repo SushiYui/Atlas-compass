@@ -158,9 +158,9 @@
                 connections.add(statement.connection);
             }
 
-            const $text = $('<span />').text(`${data.nb_statements} statements were executed`);
+            const $text = $('<span />').text(`${data.nb_statements} ${data.nb_statements == 1 ? 'statement was' : 'statements were'} executed`);
             if (data.nb_excluded_statements) {
-                $text.append(`, ${data.nb_excluded_statements} have been excluded`);
+                $text.append(`, ${data.nb_excluded_statements} ${data.nb_excluded_statements == 1 ? 'has' : 'have'} been excluded`);
             }
             if (data.nb_failed_statements > 0 || this.duplicateQueries.size > 0) {
                 const details = [];
@@ -168,7 +168,7 @@
                     details.push(`${data.nb_failed_statements} failed`);
                 }
                 if (this.duplicateQueries.size > 0) {
-                    details.push(`${this.duplicateQueries.size} duplicates`);
+                    details.push(`${this.duplicateQueries.size} ${this.duplicateQueries.size == 1 ? 'duplicate' : 'duplicates'}`);
                 }
                 $text.append(` (${details.join(', ')})`);
             }
@@ -229,7 +229,11 @@
                     .attr('data-duplicate', false)
                     .append($('<strong />').addClass(csscls('sql name')).text(statement.sql));
             } else {
-                const $code = $('<code />').html(PhpDebugBar.Widgets.highlight(statement.sql, 'sql')).addClass(csscls('sql'));
+                const $code = $('<code />').html(PhpDebugBar.Widgets.highlight(statement.sql, 'sql')).addClass(csscls('sql'));                
+                $li.attr('data-connection', statement.connection)
+                    .attr('data-duplicate', this.duplicateQueries.has(statement))
+                    .append($code);
+
                 if (statement.show_copy) {
                     $('<span title="Copy to clipboard" />')
                         .addClass(csscls('copy-clipboard'))
@@ -242,11 +246,8 @@
                                     $(event.target).removeClass(csscls('copy-clipboard-check'));
                                 }, 2000)
                             }
-                        }).appendTo($code);
+                        }).appendTo($li);
                 }
-                $li.attr('data-connection', statement.connection)
-                    .attr('data-duplicate', this.duplicateQueries.has(statement))
-                    .append($code);
             }
 
             if (statement.width_percent) {
@@ -334,16 +335,18 @@
             const $li = $('<li />').addClass(csscls('table-list-item'));
             const $muted = $('<span />').addClass(css('text-muted'));
 
-            for (const i in values) {
+            let i = 0;
+            for (const value of values) {
                 if (showLineNumbers) {
-                    $ul.append($li.clone().append([$muted.clone().text(`${i}:`), '&nbsp;', $('<span/>').text(values[i])]));
+                    $ul.append($li.clone().append([$muted.clone().text(`${i}:`), '&nbsp;', $('<span/>').text(value)]));
                 } else {
                     if (caption === 'Hints') {
-                        $ul.append($li.clone().append(values[i]));
+                        $ul.append($li.clone().append(value));
                     } else {
-                        $ul.append($li.clone().text(values[i]));
+                        $ul.append($li.clone().text(value));
                     }
                 }
+                i++;
             }
 
             return this.renderDetail(caption, icon, $ul);
@@ -353,7 +356,7 @@
             const $muted = $('<span />').addClass(css('text-muted'));
 
             const values = [];
-            for (const trace of traces) {
+            for (const trace of traces.values()) {
                 const $span = $('<span/>').text(trace.name || trace.file);
                 if (trace.namespace) {
                     $span.prepend(`${trace.namespace}::`);
