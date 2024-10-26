@@ -145,6 +145,8 @@ return [
     'role' => '権限',
     'password' => 'パスワード',
     'remember_token' => 'リメンバートークン',
+    'main_category_name' => 'メインカテゴリー',
+    'sub_category_name' => 'サブカテゴリー'
 ],
 
     /*

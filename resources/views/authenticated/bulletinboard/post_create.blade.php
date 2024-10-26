@@ -31,6 +31,7 @@
     <form action="{{ route('post.create') }}" method="post" id="postCreate">{{ csrf_field() }}</form>
   </div>
   @can('admin')
+
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
       <div class="">
@@ -38,10 +39,31 @@
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
       </div>
-      <!-- サブカテゴリー追加 -->
       <form action="{{ route('main.category.create') }}" method="post" id="mainCategoryRequest">{{ csrf_field() }}</form>
+
+
+      <!-- サブカテゴリー追加 -->
+      <div class="">
+        <p class="m-0">サブカテゴリー</p>
+        <select name="main_category_name" form="subCategoryRequest">
+            <option value=""></option>
+            @foreach($main_categories as $main_category)
+            <option value={{ $main_category->id }}>{{ $main_category->main_category }}</option>
+            @endforeach
+        </select>
+        <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest">
+        <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="subCategoryRequest">
+      </div>
+      @if($errors->has('birth_day'))
+      @foreach ($errors->get('birth_day') as $error )
+      <div class="error-message">{{ $error }}</div>
+      @endforeach
+      @endif
+
+      <form action="{{ route('sub.category.create') }}" method="post" id="subCategoryRequest">{{ csrf_field() }}</form>
     </div>
   </div>
+
   @endcan
 </div>
 </x-sidebar>

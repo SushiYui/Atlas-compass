@@ -12,7 +12,7 @@ class MainCategory extends Model
         'main_category'
     ];
 
-    // 1対多のリレーション。特定のメインカテゴリーは府狂うのサブカテゴリーを持つ
+    // 1対多のリレーション。特定のメインカテゴリーは複数のサブカテゴリーを持つ
     public function subCategories(){
         // リレーションの定義
         return $this->hasMany(SubCategory::Class, 'main_category_id', 'sub_category_id');
