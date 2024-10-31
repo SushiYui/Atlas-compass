@@ -22,6 +22,6 @@ class SubCategory extends Model
     // 複数のサブカテゴリーが複数のユーザーに関連付けできる
     public function posts(){
         // リレーションの定義
-        return $this->belongToMany(Post::Class, 'post_sub_categories', 'sub_category_id', 'post_id');
+        return $this->belongsToMany(Post::Class, 'post_sub_categories', 'sub_category_id', 'post_id');
     }
 }

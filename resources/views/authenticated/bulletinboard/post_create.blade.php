@@ -4,13 +4,20 @@
     <div class="">
       <p class="mb-0">カテゴリー</p>
       <select class="w-100" form="postCreate" name="post_category_id">
+        <option value=""></option>
         @foreach($main_categories as $main_category)
         <optgroup label="{{ $main_category->main_category }}">
         <!-- サブカテゴリー表示 -->
+        @foreach($sub_categories as $sub_category)
+        @if ($main_category->id === $sub_category->main_category_id)
+        <option value={{ $sub_category->id }}>{{ $sub_category->sub_category }}</option>
+        @endif
+        @endforeach
         </optgroup>
         @endforeach
       </select>
     </div>
+
     <div class="mt-3">
       @if($errors->first('post_title'))
       <span class="error_message">{{ $errors->first('post_title') }}</span>
@@ -45,6 +52,10 @@
       <!-- サブカテゴリー追加 -->
       <div class="">
         <p class="m-0">サブカテゴリー</p>
+        @if($errors->first('sub_category_name'))
+        <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
+        @endif
+
         <select name="main_category_name" form="subCategoryRequest">
             <option value=""></option>
             @foreach($main_categories as $main_category)
