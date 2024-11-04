@@ -146,7 +146,9 @@ return [
     'password' => 'パスワード',
     'remember_token' => 'リメンバートークン',
     'main_category_name' => 'メインカテゴリー',
-    'sub_category_name' => 'サブカテゴリー'
+    'sub_category_name' => 'サブカテゴリー',
+    'post_title' => 'タイトル',
+    'post_body' => '投稿'
 ],
 
     /*
