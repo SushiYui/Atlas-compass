@@ -25,14 +25,28 @@ class PostsController extends Controller
         $like = new Like;
         $post_comment = new Post;
         if(!empty($request->keyword)){
-            $posts = Post::with('user', 'postComments')
-            ->where('post_title', 'like', '%'.$request->keyword.'%')
-            ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            // if文で確認する前にkeywordとsubcategoryテーブルのsubcategoryが一致しているかどうか確認
+            $sub_category = SubCategory::where('sub_category', $request->keyword)->first();
+            if($sub_category){
+                $posts = Post::whereHas('subCategories', function($q) use ($sub_category){
+                    $q->where('sub_category_id', $sub_category->id);
+                });
+                $posts = $posts->get();
+            }else{
+                $posts = Post::with('user', 'postComments')
+                ->where('post_title', 'like', '%'.$request->keyword.'%')
+                ->orWhere('post', 'like', '%'.$request->keyword.'%')->get();
+            }
+
         }else if($request->category_word){
-            $sub_category = $request->category_word;
-            $posts = Post::with('user', 'postComments')
-            ->where('id', PostSubCategory::post_id())
-            ->get();
+            $category_word = $request->category_word;
+            $sub_category = SubCategory::where('sub_category', $category_word)->first();
+            // dd($sub_category[0]->id);getの時は配列の番号を指定するかforeachで指定して
+            $posts = Post::whereHas('subCategories', function($q) use ($sub_category){
+                $q->where('sub_category_id', $sub_category->id);
+            });
+            $posts = $posts->get();
+
         }else if($request->like_posts){
             $likes = Auth::user()->likePostId()->get('like_post_id');
             $posts = Post::with('user', 'postComments')
