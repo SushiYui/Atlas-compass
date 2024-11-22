@@ -4,6 +4,7 @@ namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Posts\Post;
 use App\Models\Users\User;
 
 class PostComment extends Model

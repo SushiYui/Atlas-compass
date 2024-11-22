@@ -2,7 +2,7 @@
 <div class="vh-100 d-flex">
   <div class="w-50 mt-5">
     <div class="m-3 detail_container">
-        
+
         @if($errors->first('post_title'))
         <span class="error_message">{{ $errors->first('post_title') }}</span>
         @endif
@@ -59,6 +59,9 @@
         <input type="submit" class="btn btn-primary" form="commentRequest" value="投稿">
         <form action="{{ route('comment.create') }}" method="post" id="commentRequest">{{ csrf_field() }}</form>
       </div>
+      @if($errors->first('comment'))
+      <span class="error_message">{{ $errors->first('comment') }}</span>
+      @endif
     </div>
   </div>
 </div>

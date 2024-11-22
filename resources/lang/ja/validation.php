@@ -147,6 +147,7 @@ return [
     'remember_token' => 'リメンバートークン',
     'main_category_name' => 'メインカテゴリー',
     'sub_category_name' => 'サブカテゴリー',
+    'comment' => 'コメント',
 ],
 
     /*

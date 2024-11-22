@@ -4,6 +4,7 @@ namespace App\Models\Posts;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories\SubCategory;
+use App\Models\Posts\Like;
 
 
 class Post extends Model
@@ -32,6 +33,10 @@ class Post extends Model
 
     // コメント数
     public function commentCounts($post_id){
-        return Post::with('postComments')->find($post_id)->postComments();
+        return Post::with('postComments')->find($post_id)->postComments->count();
+    }
+
+    public function likes(){
+        return $this->hasMany('App\Models\Posts\Like');
     }
 }

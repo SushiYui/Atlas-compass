@@ -14,6 +14,7 @@ use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Http\Requests\BulletinBoard\PostEditRequest;
 use App\Http\Requests\BulletinBoard\SubCategoryRequest;
+use App\Http\Requests\BulletinBoard\PostCommentRequest;
 use Auth;
 
 class PostsController extends Controller
@@ -108,7 +109,7 @@ class PostsController extends Controller
     }
 
 
-    public function commentCreate(Request $request){
+    public function commentCreate(PostCommentRequest $request){
         PostComment::create([
             'post_id' => $request->post_id,
             'user_id' => Auth::id(),
@@ -140,6 +141,10 @@ class PostsController extends Controller
         $like->like_post_id = $post_id;
         $like->save();
 
+        // この投稿の最新の総いいね数を取得
+        // $post_likes_count = Post::whitCount('likes')->findOrFail($post_id)->likes_count;
+
+        // $param = ['post_likes_count' => $post_likes_count];
         return response()->json();
     }
 
