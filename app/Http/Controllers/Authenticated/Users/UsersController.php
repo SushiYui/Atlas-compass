@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Gate;
 use App\Models\Users\User;
 use App\Models\Users\Subjects;
+use App\Models\Users\SubjectUser;
 use App\Searchs\DisplayUsers;
 use App\Searchs\SearchResultFactories;
 
@@ -21,10 +22,14 @@ class UsersController extends Controller
         $gender = $request->sex;
         $role = $request->role;
         $subjects = null;// ここで検索時の科目を受け取る
+        // $subjects = $request->subjects;
+        // dd($subjects);
         $userFactory = new SearchResultFactories();
         $users = $userFactory->initializeUsers($keyword, $category, $updown, $gender, $role, $subjects);
+
         $subjects = Subjects::all();
-        return view('authenticated.users.search', compact('users', 'subjects'));
+        // dd($subjects);
+        return view('authenticated.users.search', compact( 'users', 'subjects'));
     }
 
     public function userProfile($id){

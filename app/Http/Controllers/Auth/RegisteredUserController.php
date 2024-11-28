@@ -15,6 +15,7 @@ use App\Http\Requests\Auth\RegisterRequest;
 
 use App\Models\Users\Subjects;
 use App\Models\Users\User;
+use App\Models\Users\SubjectUser;
 
 class RegisteredUserController extends Controller
 {
@@ -60,11 +61,16 @@ class RegisteredUserController extends Controller
                 'role' => $request->role,
                 'password' => bcrypt($request->password)
             ]);
+            $user = User::findOrFail($user_get->id);
+
             // dd($user_get);
-            // if($request->role == 4){
-                $user = User::findOrFail($user_get->id);
-                $user->subjects()->attach($subjects);
-            // }
+            if($request->role == 4){
+                SubjectUser::create([
+                    'user_id' => $user->id,
+                    'subject_id' => $request->user_subject_id,
+                ]);
+                // $user->subjects()->attach($subjects);
+            }
             DB::commit();
             return view('auth.login.login');
         }catch(\Exception $e){
