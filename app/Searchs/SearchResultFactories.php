@@ -2,6 +2,7 @@
 namespace App\Searchs;
 
 use App\Models\Users\User;
+use App\Models\Users\Subjects;
 
 class SearchResultFactories{
 

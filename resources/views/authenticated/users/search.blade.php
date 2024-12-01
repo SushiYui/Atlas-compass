@@ -43,8 +43,9 @@
       </div>
       <div>
         @if($user->role == 4)
+        <span>選択科目 :</span>
         @foreach ($user->subjects as $subject_user)
-        <span>選択科目 :{{ $subject_user->subject }}</span>
+        <span>{{ $subject_user->subject }}</span>
         @endforeach
         @endif
       </div>
@@ -91,7 +92,7 @@
             </select>
           </div>
           <div class="selected_engineer">
-            <label>選択科目</label>
+            <label>選択科目：</label>
             @foreach ($subjects as $subject)
             <span>{{ $subject->subject }}</span><input type="checkbox" name="subjects" value={{ $subject->subject }} form="userSearchRequest">
             @endforeach
