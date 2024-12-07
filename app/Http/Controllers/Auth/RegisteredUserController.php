@@ -65,11 +65,7 @@ class RegisteredUserController extends Controller
 
             // dd($user_get);
             if($request->role == 4){
-                SubjectUser::create([
-                    'user_id' => $user->id,
-                    'subject_id' => $request->user_subject_id,
-                ]);
-                // $user->subjects()->attach($subjects);
+                $user->subjects()->attach($subjects);
             }
             DB::commit();
             return view('auth.login.login');
