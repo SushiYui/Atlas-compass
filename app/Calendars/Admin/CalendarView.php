@@ -1,5 +1,6 @@
 <?php
 namespace App\Calendars\Admin;
+
 use Carbon\Carbon;
 use App\Models\Users\User;
 
@@ -35,16 +36,19 @@ class CalendarView{
 
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
+
       $days = $week->getDays();
       foreach($days as $day){
         $startDay = $this->carbon->format("Y-m-01");
         $toDay = $this->carbon->format("Y-m-d");
+
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
           $html[] = '<td class="past-day border">';
         }else{
           $html[] = '<td class="border '.$day->getClassName().'">';
         }
         $html[] = $day->render();
+
         $html[] = $day->dayPartCounts($day->everyDay());
         $html[] = '</td>';
       }
@@ -57,16 +61,25 @@ class CalendarView{
     return implode("", $html);
   }
 
+//   週情報を取得するメソッド
   protected function getWeeks(){
     $weeks = [];
+    // 初日を取得（Carbonを使うことで日付操作ができる、
+    // copy()をはさむことで日付操作しても影響が出ない）
     $firstDay = $this->carbon->copy()->firstOfMonth();
+    // 月末
     $lastDay = $this->carbon->copy()->lastOfMonth();
+    // １週目
     $week = new CalendarWeek($firstDay->copy());
     $weeks[] = $week;
+    // 作業用の日
     $tmpDay = $firstDay->copy()->addDay(7)->startOfWeek();
+    // 月末までループさせる
     while($tmpDay->lte($lastDay)){
+        // 週カレンダーview作成
       $week = new CalendarWeek($tmpDay, count($weeks));
       $weeks[] = $week;
+    //   次の週は＋７する
       $tmpDay->addDay(7);
     }
     return $weeks;

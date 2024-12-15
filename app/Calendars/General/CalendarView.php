@@ -2,6 +2,7 @@
 namespace App\Calendars\General;
 
 use Carbon\Carbon;
+use App\Models\Calendars\ReserveSettings;
 use Auth;
 
 class CalendarView{
@@ -18,20 +19,22 @@ class CalendarView{
   function render(){
     $html = [];
     $html[] = '<div class="calendar text-center">';
-    $html[] = '<table class="table">';
+    $html[] = '<table class="table m-auto border">';
     $html[] = '<thead>';
     $html[] = '<tr>';
-    $html[] = '<th>月</th>';
-    $html[] = '<th>火</th>';
-    $html[] = '<th>水</th>';
-    $html[] = '<th>木</th>';
-    $html[] = '<th>金</th>';
-    $html[] = '<th>土</th>';
-    $html[] = '<th>日</th>';
+    $html[] = '<th class="border">月</th>';
+    $html[] = '<th class="border">火</th>';
+    $html[] = '<th class="border">水</th>';
+    $html[] = '<th class="border">木</th>';
+    $html[] = '<th class="border">金</th>';
+    $html[] = '<th class="border">土</th>';
+    $html[] = '<th class="border">日</th>';
     $html[] = '</tr>';
     $html[] = '</thead>';
     $html[] = '<tbody>';
+
     $weeks = $this->getWeeks();
+
     foreach($weeks as $week){
       $html[] = '<tr class="'.$week->getClassName().'">';
 
@@ -41,32 +44,45 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="calendar-td">';
+          $html[] = '<td class="past-day border calendar-td">';
+
         }else{
-          $html[] = '<td class="calendar-td '.$day->getClassName().'">';
+          $html[] = '<td class="border calendar-td'.$day->getClassName().'">';
+
         }
         $html[] = $day->render();
 
-        if(in_array($day->everyDay(), $day->authReserveDay())){
-          $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
-          if($reservePart == 1){
-            $reservePart = "リモ1部";
-          }else if($reservePart == 2){
-            $reservePart = "リモ2部";
-          }else if($reservePart == 3){
-            $reservePart = "リモ3部";
-          }
-          if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px"></p>';
+        //   予約受付
+          if(in_array($day->everyDay(), $day->authReserveDay())){
+            // その日にログインユーザーが何を予約しているか確認する
+            $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            if($reservePart == 1){
+              $reservePart = "1部";
+            //   $reservePart = "リモ1部";
+            }else if($reservePart == 2){
+              $reservePart = "2部";
+            }else if($reservePart == 3){
+              $reservePart = "3部";
+            }
+            // 参加登録している場合で、過去の場合『○部参加』、未来の場合『リモ○部』のボタンを表示させる。
+        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px" >'. $reservePart .'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-          }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
-          }
         }else{
-          $html[] = $day->selectPart($day->everyDay());
+            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">リモ'. $reservePart .'</button>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }
-        $html[] = $day->getDate();
+      }else{
+        // 参加登録していない場合で、過去の場合『受付終了』、未来の場合参加枠を表示させる。
+        if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
+            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px" >受付終了</p>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+        }else{
+            $html[] = $day->selectPart($day->everyDay());
+        }
+
+    }
+    $html[] = $day->getDate();
         $html[] = '</td>';
       }
       $html[] = '</tr>';

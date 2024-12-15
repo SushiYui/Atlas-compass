@@ -1,6 +1,10 @@
 <?php
 namespace App\Calendars\Admin;
 
+/**
+* 余白を出力するためのクラス
+*/
+
 class CalendarWeekBlankDay extends CalendarWeekDay{
 
   function getClassName(){
