@@ -13,4 +13,45 @@
     </div>
   </div>
 </div>
+
+{{-- キャンセルモーダル --}}
+<div class="modal js-modal">
+    <div class="modal__bg js-modal-close">
+      <div class="modal__content">
+          <p class="reserve_day">予約日：<span></span></p>
+          <p class="reserve_part">時間：リモ<span></span></p>
+          <p>上記予約をキャンセルしてもよろしいですか？</p>
+          <div class="w-50 m-auto edit-modal-btn d-flex">
+          <button class="js-modal-close btn btn-primary d-block">閉じる</button>
+              <form method="post" action="{{ route('deleteParts') }}">
+                  <button class="btn btn-danger d-inline-block">キャンセル</button>
+              </form>
+
+          </div>
+        </div>
+
+      </div>
+
+  </div>
+
+{{-- <div id="delete-modal" class="modal">
+  <div id="js-overlay" class="modal__bg">
+    <div class="modal__content">
+        <p>予約日：</p>
+        <p>時間：リモ</p>
+        <p>上記予約をキャンセルしてもよろしいですか？</p>
+        <div class="button__box">
+            <form method="post" action="{{ route('deleteParts') }}">
+                <button class="modal__button">キャンセル</button>
+            </form>
+            <button id="modal__button" class="modal__button">閉じる</button>
+
+        </div>
+      </div>
+
+    </div>
+
+</div> --}}
+
+
 </x-sidebar>

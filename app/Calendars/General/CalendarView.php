@@ -56,9 +56,9 @@ class CalendarView{
           if(in_array($day->everyDay(), $day->authReserveDay())){
             // その日にログインユーザーが何を予約しているか確認する
             $reservePart = $day->authReserveDate($day->everyDay())->first()->setting_part;
+            // dd($reservePart);
             if($reservePart == 1){
               $reservePart = "1部";
-            //   $reservePart = "リモ1部";
             }else if($reservePart == 2){
               $reservePart = "2部";
             }else if($reservePart == 3){
@@ -69,14 +69,15 @@ class CalendarView{
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px" >'. $reservePart .'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }else{
-            $html[] = '<button type="submit" class="btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">リモ'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            // $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" onClick="delete_modal()">リモ'. $reservePart .'</button>';
+            $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" reserve_data="'.$reservePart.'" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">リモ'. $reservePart .'</button>';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
         }
       }else{
         // 参加登録していない場合で、過去の場合『受付終了』、未来の場合参加枠を表示させる。
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
             $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px" >受付終了</p>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts" >';
         }else{
             $html[] = $day->selectPart($day->everyDay());
         }

@@ -36,4 +36,10 @@ class CalendarController extends Controller
         }
         return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
+
+    public function delete($id){
+        ReserveSettings::where('id', $id)->delete();
+        return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+    }
+
 }
