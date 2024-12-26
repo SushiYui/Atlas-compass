@@ -23,10 +23,8 @@
           <p>上記予約をキャンセルしてもよろしいですか？</p>
           <div class="w-50 m-auto edit-modal-btn d-flex">
           <button class="js-modal-close btn btn-primary d-block">閉じる</button>
-              <form method="post" action="{{ route('deleteParts') }}">
-                  <button class="btn btn-danger d-inline-block">キャンセル</button>
-              </form>
-
+                <input type="hidden" name="getPart[]" value="" form="deleteParts">
+                <button class="btn btn-danger d-inline-block" form="deleteParts">キャンセル</button>
           </div>
         </div>
 

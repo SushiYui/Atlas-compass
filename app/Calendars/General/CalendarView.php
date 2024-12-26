@@ -71,7 +71,7 @@ class CalendarView{
         }else{
             // $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" onClick="delete_modal()">リモ'. $reservePart .'</button>';
             $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" reserve_data="'.$reservePart.'" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'">リモ'. $reservePart .'</button>';
-            $html[] = '<input type="hidden" name="getPart[]" value="" form="deleteParts">';
+            $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }
       }else{
         // 参加登録していない場合で、過去の場合『受付終了』、未来の場合参加枠を表示させる。
