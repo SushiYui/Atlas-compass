@@ -8,6 +8,10 @@ $('.edit-modal-open').on('click',function(){
 
     $('.reserve_part span').text(reserve_part);
     $('.reserve_day span').text(reserve_day);
+
+    document.getElementById('reservePart').value = reserve_part;
+    document.getElementById('reserveDay').value = reserve_day;
+
     return false;
 })
 $('.js-modal-close').on('click', function () {

@@ -6,6 +6,13 @@
   padding: 0;
 }
 
+.atlas{
+    display: block;
+    margin: auto;
+    max-width: 15%;
+    border: solid 2px red;
+}
+
 /* body */
 .all_content {
   background: #ECF1F6;
