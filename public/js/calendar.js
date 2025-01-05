@@ -18,4 +18,13 @@ $('.js-modal-close').on('click', function () {
     $('.js-modal').fadeOut();
     return false;
   });
+
+  // モーダル背景をクリックしたときにモーダルを閉じる
+$('.js-modal-bg').on('click', function(e){
+    // 背背景をリックしたときにモーダルを閉じて、モーダルの中身がクリックされたときは閉じない。
+    // もし e.target が modal__content 内部にあれば、その要素を返します。
+    if($(e.target).closest('.modal__content').length === 0){
+        $('.js-modal').fadeOut();
+    }
+});
 });

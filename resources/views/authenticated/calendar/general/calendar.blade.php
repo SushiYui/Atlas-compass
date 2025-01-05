@@ -16,8 +16,7 @@
 
 {{-- キャンセルモーダル --}}
 <div class="modal js-modal">
-    {{-- <div class="modal__bg js-modal-close"> --}}
-    <div class="modal__bg">
+    <div class="modal__bg js-modal-bg">
       <div class="modal__content">
           <p class="reserve_day">予約日：<span></span></p>
           <p class="reserve_part">時間：リモ<span></span></p>
@@ -26,12 +25,11 @@
           <button class="js-modal-close btn btn-primary d-block">閉じる</button>
                 <input type="hidden" id="reservePart" name="reserve_part" form="deleteParts">
                 <input type="hidden" id="reserveDay" name="reserve_day" form="deleteParts">
-                {{-- <button class="btn btn-danger d-inline-block" form="deleteParts">キャンセル</button> --}}
                 <input type="submit" class="btn btn-danger d-inline-block" value="キャンセル" form="deleteParts">
           </div>
         </div>
 
-      </div>
+    </div>
 
   </div>
 

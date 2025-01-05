@@ -39,23 +39,27 @@ class CalendarController extends Controller
     }
 
     public function delete(Request $request){
-        // if($request->reserve_part == "1部"){
-        //     $reserve_part = 1;
-        // }else if($request->reserve_part == "2部"){
-        //     $reserve_part = 2;
-        // }else if($request->reserve_part == "3部"){
-        //     $reserve_part = 3;
-        // }
+        if($request->reserve_part == "1部"){
+            $reserve_part = 1;
+        }else if($request->reserve_part == "2部"){
+            $reserve_part = 2;
+        }else if($request->reserve_part == "3部"){
+            $reserve_part = 3;
+        }
         // dd($reserve_part);
-
-            // $getPart = $reserve_part;
-            $getPart = $request->input('reserve_part');
+        DB::beginTransaction();
+        try{
+            $getPart = $reserve_part;
             $getDate = $request->input('reserve_day');
                 $reserve_settings = ReserveSettings::where('setting_reserve', $getDate)->where('setting_part', $getPart)->first();
                 $reserve_settings->increment('limit_users');
-                $reserve_settings->users()->delete(Auth::id());
+                $reserve_settings->users()->detach(Auth::id());
 
-                return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
+                DB::commit();
+            }catch(\Exception $e){
+                DB::rollback();
+            }
+                    return redirect()->route('calendar.general.show', ['user_id' => Auth::id()]);
     }
 
 }
