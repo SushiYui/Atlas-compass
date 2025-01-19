@@ -27,6 +27,8 @@ Route::group(['middleware' => 'auth'], function(){
         Route::namespace('Top')->group(function(){
             Route::get('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+            // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+            //     ->name('login');
             Route::get('top', [TopsController::class, 'show'])->name('top.show');
         });
         Route::namespace('Calendar')->group(function(){
