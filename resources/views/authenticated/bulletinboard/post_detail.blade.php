@@ -24,8 +24,11 @@
         </div>
 
         <div class="contributor d-flex">
-          <p>
-            <span>{{ $post->user->over_name }}</span>
+            {{-- サブカテゴリーボタンを追加 --}}
+        @foreach ($post->subCategories as $subCategory)
+        <input type="submit" name="category_word" class="category_btn" value={{ $subCategory->sub_category }}>
+        @endforeach
+        <p><span>{{ $post->user->over_name }}</span>
             <span>{{ $post->user->under_name }}</span>
             さん
           </p>

@@ -13,6 +13,7 @@ use App\Models\Posts\Like;
 use App\Models\Users\User;
 use App\Http\Requests\BulletinBoard\PostFormRequest;
 use App\Http\Requests\BulletinBoard\PostEditRequest;
+use App\Http\Requests\BulletinBoard\MainCategoryRequest;
 use App\Http\Requests\BulletinBoard\SubCategoryRequest;
 use App\Http\Requests\BulletinBoard\PostCommentRequest;
 use Auth;
@@ -20,7 +21,7 @@ use Auth;
 class PostsController extends Controller
 {
     public function show(Request $request){
-        $posts = Post::with('user', 'postComments')->get();
+        $posts = Post::with('user', 'postComments', 'subCategories')->get();
         // dd($posts);
         $categories = MainCategory::get();
         $sub_categories = SubCategory::get();
@@ -57,11 +58,12 @@ class PostsController extends Controller
             $posts = Post::with('user', 'postComments')
             ->where('user_id', Auth::id())->get();
         }
+        // dd($sub_categories);
         return view('authenticated.bulletinboard.posts', compact('posts', 'categories', 'sub_categories', 'like', 'post_comment'));
     }
 
     public function postDetail($post_id){
-        $post = Post::with('user', 'postComments')->findOrFail($post_id);
+        $post = Post::with('user', 'postComments' ,'subCategories')->findOrFail($post_id);
         return view('authenticated.bulletinboard.post_detail', compact('post'));
     }
 
@@ -98,7 +100,7 @@ class PostsController extends Controller
         return redirect()->route('post.show');
     }
 
-    public function mainCategoryCreate(Request $request){
+    public function mainCategoryCreate(MainCategoryRequest $request){
         MainCategory::create(['main_category' => $request->main_category_name]);
         return redirect()->route('post.input');
     }

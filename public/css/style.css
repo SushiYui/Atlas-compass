@@ -6,11 +6,28 @@
   padding: 0;
 }
 
+/* ログインページ */
+.main-box{
+    display: block;
+}
+
+.first-bg{
+    background-color: #ecf1f6;
+}
+
+.login-box{
+    height: 35vh;
+    width: 25em;
+    border: solid 1px #c0c0c0;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .3);
+    background-color: #FFF;
+}
+
 .atlas{
     display: block;
-    margin: auto;
-    max-width: 15%;
-    border: solid 2px red;
+    margin: 35px auto;
+    width: 50%;
 }
 
 /* body */
@@ -25,7 +42,7 @@ li {
 
 /* サイドバー */
 .sidebar {
-  width: 150px;
+  width: 200px;
   height: 100vh;
   background-color: #03AAD2;
   font-weight: bold;
@@ -37,12 +54,25 @@ li {
 
 .sidebar p a {
   color: #FFF;
+  margin-left: 10px;
+}
+
+.sidebar-icon img{
+    width: 20px;
+    height: 20px;
+    /* filter: invert(100%); */
 }
 
 /* トップページ */
+.top-title{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
 .user_status {
   border-radius: 10px;
   background: #FFF;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, .3);
 }
 
 /* スクール予約関連 */
@@ -149,6 +179,7 @@ li {
 
 .like_btn,
 .un_like_btn {
+  margin-left: 30px;
   cursor: pointer;
 }
 
@@ -160,6 +191,74 @@ li {
 .error_message {
   font-size: 12px;
   color: red;
+}
+
+/* ---------------------投稿ボタン */
+.post-btn{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #00b4db;
+    height: 40px;
+}
+/* ---------------------検索ボタン */
+.post-keyword{
+    padding: 0 12px;
+    border: solid 1px #c0c0c0;
+    border-radius: 5px 0 0 5px;
+    cursor: pointer;
+    flex-grow: 1;/* キーワード入力欄を可能な限り広げる */
+    min-width: 0; /* 横幅の計算を正しくする */
+}
+
+.keyword-btn{
+    padding: 0 12px;
+    border: solid 1px #00b4db;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    color: #fff;
+    background-color: #00b4db;
+}
+
+.post-search{
+    display: flex;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+/* ---------------------Like、myポストボタン */
+.post-btn-box{
+    display: flex;
+    text-align: center;
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.category_like{
+    padding: 0 12px;
+    margin-right: 2px;
+    border: solid 1px #ffb6c1;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #ffb6c1;
+    flex-grow: 1;/* キーワード入力欄を可能な限り広げる */
+    min-width: 0; /* 横幅の計算を正しくする */
+}
+
+.category_mypost{
+    padding: 0 12px;
+    border: solid 1px #ffd700;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #ffd700;
+    flex-grow: 1;/* キーワード入力欄を可能な限り広げる */
+    min-width: 0; /* 横幅の計算を正しくする */
 }
 
 /* 掲示板 詳細画面 */
@@ -220,10 +319,22 @@ li {
   font-size: 12px;
 }
 
+.post_bottom_box{
+    display: flex;
+}
+
 /* 掲示板　カテゴリー */
 .category_area {
   background: #FFF;
   border-radius: 10px;
+}
+
+.category_area input{
+    margin-bottom: 10px;
+}
+
+.select_main{
+    margin-bottom: 10px;
 }
 
 .category_box {
@@ -243,11 +354,55 @@ li {
   color: #FFF;
 }
 
-.main_categories span,
-.sub_categories li input {
-  list-style: none;
+/* ---------------------メインカテゴリーボタン */
+.main_categories{
+    position: relative;
+  display: block;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  border: none;
   cursor: pointer;
+  background: #ecf1f6;
 }
+
+.main_categories span{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block;
+    width: 0.7em;
+    height: 0.7em;
+    border: 0.1em solid currentColor;
+    border-left: 0;
+    border-bottom: 0;
+    box-sizing: border-box;
+    transform: translateY(-25%) rotate(135deg);
+}
+
+.point_second{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: block;
+    width: 0.7em;
+    height: 0.7em;
+    border: 0.1em solid currentColor;
+    border-right: 0;
+    border-top: 0;
+    box-sizing: border-box;
+    transform: translateY(-25%) rotate(135deg);
+}
+
+/* ---------------------カテゴリーボタン */
+.sub_category{
+    display: none;
+    width: 80%;
+    margin: 10px auto;
+    border-bottom: solid 1px #999;
+    cursor: pointer;
+    background-color: #ecf1f6;
+}
+
 
 /* ユーザー検索 */
 .reserve_users_area {

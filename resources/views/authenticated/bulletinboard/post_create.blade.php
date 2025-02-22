@@ -42,6 +42,9 @@
   <div class="w-25 ml-auto mr-auto">
     <div class="category_area mt-5 p-5">
       <div class="">
+        @if($errors->first('main_category_name'))
+        <span class="error_message">{{ $errors->first('main_category_name') }}</span>
+        @endif
         <p class="m-0">メインカテゴリー</p>
         <input type="text" class="w-100" name="main_category_name" form="mainCategoryRequest">
         <input type="submit" value="追加" class="w-100 btn btn-primary p-0" form="mainCategoryRequest">
@@ -51,15 +54,15 @@
 
       <!-- サブカテゴリー追加 -->
       <div class="">
-        <p class="m-0">サブカテゴリー</p>
         @if($errors->first('sub_category_name'))
         <span class="error_message">{{ $errors->first('sub_category_name') }}</span>
         @endif
+        <p class="m-0">サブカテゴリー</p>
 
         <select name="main_category_name" form="subCategoryRequest">
             <option value=""></option>
             @foreach($main_categories as $main_category)
-            <option value={{ $main_category->id }}>{{ $main_category->main_category }}</option>
+            <option value={{ $main_category->id }} class="select_main">{{ $main_category->main_category }}</option>
             @endforeach
         </select>
         <input type="text" class="w-100" name="sub_category_name" form="subCategoryRequest">

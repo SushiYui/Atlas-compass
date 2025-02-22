@@ -4,6 +4,14 @@ $(function () {
     $('.category_num' + category_id).slideToggle();
   });
 
+ $('.main_categories span').click(function(e){
+    $('.main_categories span').fadeOut();
+
+    $(this).removeClass('point_second');
+
+ });
+
+
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');
