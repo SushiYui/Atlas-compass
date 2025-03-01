@@ -12,31 +12,30 @@
 
 
       <div class="p-3">
-        <div class="detail_inner_head">
-          <div>
-          </div>
-          @if (Auth::user()->id === $post->user_id)
-          <div>
-            <span class="edit-modal-open" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}">編集</span>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')">削除</a>
-          </div>
-          @endif
-        </div>
-
         <div class="contributor d-flex">
             {{-- サブカテゴリーボタンを追加 --}}
         @foreach ($post->subCategories as $subCategory)
         <input type="submit" name="category_word" class="category_btn" value={{ $subCategory->sub_category }}>
         @endforeach
-        <p><span>{{ $post->user->over_name }}</span>
+
+        @if (Auth::user()->id === $post->user_id)
+        <div class="d-flex">
+          <input type="submit" class="edit-modal-open edit-btn" post_title="{{ $post->post_title }}" post_body="{{ $post->post }}" post_id="{{ $post->id }}" value="編集">
+          <a href="{{ route('post.delete', ['id' => $post->id]) }}" onclick="return confirm('削除してよろしいですか？')"><button type="button" class="delete-btn">削除</button></a>
+        </div>
+        @endif
+        {{-- <span class="ml-5">{{ $post->created_at }}</span> --}}
+        </div>
+
+        <p class="editarea_name"><span>{{ $post->user->over_name }}</span>
             <span>{{ $post->user->under_name }}</span>
             さん
           </p>
-          <span class="ml-5">{{ $post->created_at }}</span>
-        </div>
-        <div class="detsail_post_title">{{ $post->post_title }}</div>
-        <div class="mt-3 detsail_post">{{ $post->post }}</div>
+
+        <div class="detail_post_title">{{ $post->post_title }}</div>
+        <div class="mt-3 detail_post">{{ $post->post }}</div>
       </div>
+
       <div class="p-3">
         <div class="comment_container">
           <span class="">コメント</span>
@@ -74,7 +73,7 @@
     <form action="{{ route('post.edit') }}" method="post">
       <div class="w-100">
         <div class="modal-inner-title w-50 m-auto">
-          <input type="text" name="post_title" placeholder="タイトル" class="w-100">
+          <input type="text" name="post_title" placeholder="タイトル" class="w-100 modal_title">
         </div>
         <div class="modal-inner-body w-50 m-auto pt-3 pb-3">
           <textarea placeholder="投稿内容" name="post_body" class="w-100"></textarea>

@@ -1,10 +1,10 @@
 <x-sidebar>
 <div class="board_area w-100 border m-auto d-flex">
   <div class="post_view w-75 mt-5">
-    <p class="w-75 m-auto">投稿一覧</p>
+    <p class="w-75 m-auto"></p>
     @foreach($posts as $post)
     <div class="post_area border w-75 m-auto p-3">
-      <p><span>{{ $post->user->over_name ?? 'ユーザーなし' }}</span><span class="ml-3">{{ $post->user->under_name ?? 'ユーザーなし' }}</span>さん</p>
+      <p><span>{{ $post->user->over_name ?? 'ユーザーなし' }}</span><span class="ml-3">{{ $post->user->under_name ?? 'ユーザーなし' }}</span><span>さん</span></p>
       <p><a href="{{ route('post.detail', ['id' => $post->id]) }}">{{ $post->post_title }}</a></p>
       <div class="post_bottom_area d-flex">
         <div class="post_status">
@@ -31,7 +31,7 @@
     @endforeach
   </div>
   <div class="other_area border w-25">
-    <div class="border m-4">
+    <div class="m-4">
       <div class=""><a href="{{ route('post.input') }}" class="post-btn">投稿</a></div>
       <div class="">
       <div class="post-search">

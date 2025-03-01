@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     </head>
     <body class="all_content">
-        <div class="d-flex">
+        <div class="d-flex mix_container">
             <div class="sidebar">
                 <p class="sidebar-icon"><a href="{{ route('top.show') }}">
                     <svg version="1.1" id="_x31_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 20px; height: 20px; opacity: 1;" xml:space="preserve">
@@ -65,7 +65,7 @@
                 <p class="sidebar-icon"><a href="{{ route('calendar.admin.setting',['user_id' => Auth::id()]) }}">
                     <img src="{{ asset('image/calender.svg') }}" alt="calender">スクール枠登録</a></p>
                 @endif
-                <p class="sidebar-icon"><a href="{{ route('post.show') }}"><img src="{{ asset('image/comment.png') }}" alt="comment">掲示板</a></p>
+                <p class="sidebar-icon"><a href="{{ route('post.show') }}"><img src="{{ asset('image/comment.svg') }}" alt="comment">掲示板</a></p>
                 <p class="sidebar-icon"><a href="{{ route('user.show') }}"><img src="{{ asset('image/user.svg') }}" alt="user">ユーザー検索</a></p>
             </div>
             <div class="main-container">

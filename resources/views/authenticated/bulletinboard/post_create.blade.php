@@ -59,8 +59,9 @@
         @endif
         <p class="m-0">サブカテゴリー</p>
 
-        <select name="main_category_name" form="subCategoryRequest">
-            <option value=""></option>
+        <select name="main_category_name" class="main_category_name" value="" form="subCategoryRequest">
+            <option value="---"></option>
+            <option selected disabled>----</option>
             @foreach($main_categories as $main_category)
             <option value={{ $main_category->id }} class="select_main">{{ $main_category->main_category }}</option>
             @endforeach

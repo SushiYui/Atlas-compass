@@ -4,12 +4,10 @@ $(function () {
     $('.category_num' + category_id).slideToggle();
   });
 
- $('.main_categories span').click(function(e){
-    $('.main_categories span').fadeOut();
-
-    $(this).removeClass('point_second');
-
- });
+// 投稿一覧ページ＝＞サブカテゴリー
+$(document).on("click" ,".category_menu dt", function(){
+    $(this).find("span").toggleClass("open");
+});
 
 
   $(document).on('click', '.like_btn', function (e) {
@@ -72,3 +70,5 @@ $(function () {
   });
 
 });
+
+
