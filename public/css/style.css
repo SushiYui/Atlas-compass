@@ -209,6 +209,7 @@ li {
 .un_like_btn {
   margin-left: 30px;
   cursor: pointer;
+  font-weight: 900;
 }
 
 .un_like,
