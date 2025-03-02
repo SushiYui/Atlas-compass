@@ -13,6 +13,7 @@ $(document).on("click" ,".category_menu dt", function(){
   $(document).on('click', '.like_btn', function (e) {
     e.preventDefault();
     $(this).addClass('un_like_btn');
+    $(this).toggleClass('fas far');
     $(this).removeClass('like_btn');
     var post_id = $(this).attr('post_id');
     var count = $('.like_counts' + post_id).text();
@@ -35,6 +36,7 @@ $(document).on("click" ,".category_menu dt", function(){
   $(document).on('click', '.un_like_btn', function (e) {
     e.preventDefault();
     $(this).removeClass('un_like_btn');
+    $(this).toggleClass('fas far');
     $(this).addClass('like_btn');
     var post_id = $(this).attr('post_id');
     var count = $('.like_counts' + post_id).text();
