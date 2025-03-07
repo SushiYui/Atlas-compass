@@ -52,7 +52,7 @@
     @endforeach
 
   </div>
-  <div class="search_area w-25 border">
+  <div class="search_area w-25">
     <div class="">
       <div>
         <p class="search_title">検索</p>

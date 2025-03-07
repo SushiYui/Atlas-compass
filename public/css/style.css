@@ -7,6 +7,11 @@
 }
 
 /* ログインページ */
+.error-message{
+    color: red;
+    font-size: 0.8em;
+}
+
 .main-box{
     display: block;
 }
@@ -93,7 +98,7 @@ li {
   background: #D3D3D3;
 }
 
-.day-sat {
+.day-sat{
   color: #0000FF;
 }
 
@@ -183,6 +188,10 @@ li {
 
 .detail_container {
   background: #FFF;
+}
+
+.detail_container_error{
+    margin-left: 20px;
 }
 
 .post_area {
@@ -462,12 +471,16 @@ li {
 
 
 /* ユーザー検索 */
+.search_area{
+    margin-left: 30px;
+}
+
 .reserve_users_area {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
   width: 80%;
-  margin-left: 80px;
+  margin-top: 30px;
+  margin-left: 50px;
   height: 80vh;
   overflow: scroll;
   padding: 10px;
@@ -484,7 +497,8 @@ li {
 }
 
 .one_person {
-  margin: 5px;
+  margin-right: 10px;
+  margin-bottom: 25px;
   padding: 15px;
   box-shadow: 0 5px 15px 0 rgba(0, 0, 0, .3);
   border-radius: 10px;
