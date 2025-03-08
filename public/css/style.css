@@ -110,6 +110,10 @@ li {
   background: #EEE;
 }
 
+.finish_color{
+    color: #000000;
+}
+
 .calendar-td {
   min-width: 100px;
 }
@@ -457,8 +461,6 @@ li {
     transform: translateY(-25%) rotate(135deg);
 }
 
-
-
 /* ---------------------カテゴリーボタン */
 .post_sub{
     display: flex;
@@ -690,6 +692,12 @@ li {
     background-color: #d6ffff;
 }
 
+.reserve_area{
+    width: 80%;
+    height: 80%;
+    margin: 0 auto;
+}
+
 .reserve_table
 {
     border-collapse: separate;
@@ -697,6 +705,7 @@ li {
     padding: 2px;
     background-color: #fff;
     border-radius: 5px;
+    width: 100%;
 }
 
 .reserve_table td{

@@ -44,8 +44,7 @@ class CalendarView{
         $toDay = $this->carbon->copy()->format("Y-m-d");
 
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-          $html[] = '<td class="past-day border calendar-td">';
-
+          $html[] = '<td class="past-day border calendar-td '.$day->getClassName().'">';
         }else{
           $html[] = '<td class="border calendar-td '.$day->getClassName().'">';
 
@@ -66,7 +65,7 @@ class CalendarView{
             }
             // 参加登録している場合で、過去の場合『○部参加』、未来の場合『リモ○部』のボタンを表示させる。
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px" >'. $reservePart .'参加</p>';
+            $html[] = '<p class="m-auto p-0 w-75 text-dark" style="font-size:12px" >'. $reservePart .'参加</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts">';
         }else{
             // $html[] = '<button type="submit" class="edit-modal-open btn btn-danger p-0 w-75" name="delete_date" style="font-size:12px" value="'. $day->authReserveDate($day->everyDay())->first()->setting_reserve .'" onClick="delete_modal()">リモ'. $reservePart .'</button>';
@@ -76,7 +75,7 @@ class CalendarView{
       }else{
         // 参加登録していない場合で、過去の場合『受付終了』、未来の場合参加枠を表示させる。
         if($startDay <= $day->everyDay() && $toDay >= $day->everyDay()){
-            $html[] = '<p class="m-auto p-0 w-75" style="font-size:12px" >受付終了</p>';
+            $html[] = '<p class="m-auto p-0 w-75 text-dark" style="font-size:12px" >受付終了</p>';
             $html[] = '<input type="hidden" name="getPart[]" value="" form="reserveParts" >';
         }else{
             $html[] = $day->selectPart($day->everyDay());
