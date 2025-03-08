@@ -698,6 +698,10 @@ li {
     margin: 0 auto;
 }
 
+.detail_id{
+    width: 13%;
+}
+
 .reserve_table
 {
     border-collapse: separate;
