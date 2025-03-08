@@ -52,12 +52,13 @@
             <dt class="main_categories" category_id="{{ $category->id }}">{{ $category->main_category }}
                 <span class=""></span>
             </dt>
+            <div class="post_sub">
             @foreach ($sub_categories as $sub_category)
             @if ($category->id === $sub_category->main_category_id)
-            <input type="hidden" name="sub_category" value="{{ $sub_category->sub_category }}" form="postSearchRequest">
-            <p class="category_num{{ $category->id }} sub_category">{{ $sub_category->sub_category }}</p>
+            <input type="submit" class="category_num{{ $category->id}} sub_category" name="sub_category" value="{{ $sub_category->sub_category }}" form="postSearchRequest">
             @endif
             @endforeach
+        </div>
         @endforeach
         </article>
         </dl>

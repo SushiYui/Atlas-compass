@@ -460,10 +460,18 @@ li {
 
 
 /* ---------------------カテゴリーボタン */
+.post_sub{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .sub_category{
     display: none;
     width: 80%;
     margin: 10px auto;
+    text-align: left;
+    border: none;
     border-bottom: solid 1px #999;
     cursor: pointer;
     background-color: #ecf1f6;
